@@ -1,0 +1,98 @@
+* {
+	font-family: 'Titillium Web', sans-serif;
+}
+
+html, body {
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+body {
+	/*background-color: #937ed8;*/
+	background-color: #ddd8f1;
+}
+
+nav {
+	flex-basis: 5%;
+	background-color: #593cb6;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 10px 0;
+}
+
+.navbar-list {
+	display: flex;
+	flex-direction: row;
+}
+
+.badge {
+	flex-basis: 66%;
+	padding-left: 10px;
+	font-weight: bold;
+	color: #14d2d6;
+}
+
+.navbar-list-item {
+	flex-basis: 11%;
+	text-align: center;
+	color: white;
+}
+
+main {
+	flex-basis: 95%;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	flex-basis: 20%;
+}
+
+.header-box {
+	border-radius: 10px;
+	background-color: white;
+	margin-left: 30vw;
+	margin-right: 30vw;
+}
+
+h1, h3 {
+	text-align: center;
+	color: #593cb6;
+}
+
+h1 {
+	margin-top: 30px;
+	margin-bottom: 0;
+}
+
+h3 {
+	font-style: italic;
+	margin-top: 0;
+}
+
+.coin-data {
+	color: black;
+	flex-basis: 80%;
+	text-align: center;
+}
+
+.currencies {
+	display: grid;
+	grid-template-columns: repeat(4, 25%);
+	grid-template-rows: repeat(4, 25%);
+}
+
+.coin-name {
+	font-weight: bold;
+	color: #593cb6;
+}
+
+.coin-symbol {
+	font-weight: bold;
+}

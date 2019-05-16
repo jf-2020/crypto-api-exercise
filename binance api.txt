@@ -1,0 +1,5 @@
+API Key:
+	t3Gyjz6VGgLXqiFesB0rfSar02C3Y1JP9ieKyJoioolLnSHBPGgDn17jem6o6n5M
+
+Secret Key:
+	 if1WvDsxAJGN27OgwWiCTu3VuLkQ1spCggwCX45b6GVTYkOcHMbecuHqanOLyAgY
