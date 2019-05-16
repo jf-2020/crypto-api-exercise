@@ -3,20 +3,22 @@
 /************/
 /* API urls */
 /************/
-
 const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=16";
+const coincap = "https://api.coincap.io/v2/assets/bitcoin/history?interval=m15";
+
 
 /***********/
 /* methods */
 /***********/
-
 function get(url) {
+	/* main getter for API data */
 	return fetch(url)
 		.then(response => {
+			// render the response as json
 			return response.json();
 		})
 		.then(data => {
-			console.log("get has run");
+			// pass out the data
 			return data;
 		})
 		.catch(error => {
@@ -24,11 +26,10 @@ function get(url) {
 		});
 }
 
-function load(url) {
+function loadCoinData(url) {
 	get(url)
 	.then(response => {
-		console.log("data has loaded", response);
-		// now do stuff
+		// then add each coin to the grid
 		response.data.forEach(coin => {
 			addCoin(coin);
 		})
@@ -69,46 +70,76 @@ function addCoin(coin) {
 	ul.append(subList);
 }
 
-function buildChart() {
-	/* build out the test chart */
+function loadCoinPrices(url) {
+	get(url)
+	.then(response => {
+		// log out the status of the response
+		const prices = [];
+		const dates = [];
+		const times = []; 
+		let count = 0;
+		// now, the prices are stored in an array of objects
+		response.data.forEach(price => {
+			// get the current price
+			const priceUSD = price.priceUsd;
+			// extract the date & time
+			const datestring = price.date;
+			const dateAndTime = datestring.split("T");
+			const day = dateAndTime[0];
+			const time = dateAndTime[1].substr(0,5);
+			// add it to the price, date & time arrays
+			if (count % 16 == 0) {
+				// but only if it's every 16th element...
+				prices.push(priceUSD);
+				dates.push(day);
+				times.push(time);
+			}
+			// bump up the count
+			count++;
+		})
+		return [prices, dates, times];
+	})
+	.then(arr => {
+		buildChart(arr[0], arr[1], arr[2]);
+	});
+}
+
+function buildChart(prices, dates, times) {
+	/* build out a price chart, where each parameter is an array */
 	
 	// get chart context, which consists of getting the chart canvas
 	// from the page & subsequently accessing its dimensional context
 	const ctx = document.getElementById("myChart").getContext("2d");
-	
 	// create the chart
 	const chart = new Chart(ctx, {
-
 		// the type of chart to create
 		type: "line",
-
 		// next, the data
 		data: {
 			// first, add in the graph labels
-			labels: ['January', 'February', 'March', 'April',
-					 'May', 'June', 'July'],
+			labels: dates,
 			// second, add in the datasets
 			datasets: [{
 				// label the first dataset
-				label: "My First Dataset",
+				label: "Bitcoin",
 				// give it a background color
-				backgroundColor: "rgb(255, 99, 132)",
+				// backgroundColor: "rgb(255, 99, 132)",
 				// style the border
 				borderColor: "rgb(255, 99, 132)",
 				// add in the data as an array
-				data: [0, 10, 5, 2, 20, 30, 45]
+				data: prices
 			}]
 		},
-
 		// lastly, configure the options
 		options: {}
 	});
 }
 
-function main() {
-	// main function for running script
-	buildChart();
-	load(coinlore);
-}
-
-main();
+/********/
+/* MAIN */
+/********/
+(function main() {
+	// run the script
+	loadCoinData(coinlore);
+	loadCoinPrices(coincap);
+})()
