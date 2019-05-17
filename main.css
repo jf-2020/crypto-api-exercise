@@ -44,6 +44,19 @@ ul {
 	color: white;
 }
 
+.navbar-list-item:hover,
+.navbar-list-item:active {
+	color: gold;
+	font-weight: bold;
+	font-size: 16pt;
+	text-decoration: underline;
+}
+
+a {
+	text-decoration: inherit;
+	color: inherit;
+}
+
 main {
 	flex-basis: 95%;
 	display: flex;
@@ -55,7 +68,7 @@ header {
 }
 
 .header-box {
-	border-radius: 10px;
+	border-radius: 20px;
 	background-color: white;
 	margin-left: 30vw;
 	margin-right: 30vw;
@@ -86,6 +99,19 @@ h3 {
 	display: grid;
 	grid-template-columns: repeat(4, 25%);
 	grid-template-rows: repeat(4, 25%);
+}
+
+.grid-cell {
+	background-color: white;
+	margin: 5px;
+	border-radius: 20px;
+}
+
+.grid-cell:hover,
+.grid-cell:active {
+	border-style: solid;
+	border-width: 2px;
+	border-color: #14d2d6;
 }
 
 .coin-name {
