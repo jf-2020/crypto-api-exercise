@@ -97,7 +97,6 @@ function loadCoinPrices(id, name) {
 	if (id.includes(" ")) {
 		const words = id.split(" ");
 		id = words.join("-");
-		console.log(id);
 	}
 	const url = `https://api.coincap.io/v2/assets/${id}/history?interval=m15`;
 	get(url)
@@ -153,7 +152,6 @@ function buildChart(prices, dates, times, name) {
 				label: name,
 				// style the border
 				borderColor: "#593cb6",
-				// borderColor: "rgb(255, 99, 132)",
 				// add in the data as an array
 				data: prices
 			}]
