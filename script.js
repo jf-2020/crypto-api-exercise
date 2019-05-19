@@ -3,7 +3,8 @@
 /************/
 /* API urls */
 /************/
-const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=16";
+
+const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=100";
 const coincap = "https://api.coincap.io/v2/assets/bitcoin-cash-sv/history?interval=m15";
 
 /***********/
@@ -152,7 +153,8 @@ function buildChart(prices, dates, times, name) {
 				// label the first dataset
 				label: name,
 				// style the border
-				borderColor: "#593cb6",
+				borderColor: "white",
+				
 				// borderColor: "rgb(255, 99, 132)",
 				// add in the data as an array
 				data: prices

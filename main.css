@@ -8,17 +8,19 @@ html, body {
 	/*overflow: hidden;*/
 	display: flex;
 	flex-direction: column;
+	scroll-behavior: smooth;
 	
 }
 
 body {
-	/*background-color: #937ed8;*/
-	background-color: #ddd8f1;
+	background-image: url("./images/topography.svg"), 
+	linear-gradient(45deg, rgb(12, 236, 197), rgb(89,60,182));
+	background-attachment: fixed;
 }
 
 nav {
 	flex-basis: 5%;
-	background-color: #593cb6;
+	/* background-color: #593cb6; */
 }
 
 ul {
@@ -28,25 +30,43 @@ ul {
 }
 
 .navbar-list {
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-row-gap: 10px;
+	grid-template-columns: repeat(auto-fill, 150px);
+	left: 55%;
+	flex-basis: 11%;
+	text-align: center;
+	color: rgb(233,233,233)
 }
 
 .badge {
 	flex-basis: 66%;
 	padding-left: 10px;
 	font-weight: bold;
-	color: #14d2d6;
+	position: fixed;
+	grid-column-start: 1;
 }
 
-.navbar-list-item {
-	flex-basis: 11%;
-	text-align: center;
-	color: white;
+.badge:hover,
+.badge:active {
+	font-size: 30pt;
 }
 
-.navbar-list-item:hover,
-.navbar-list-item:active {
+.navbar-list-item1 {
+	grid-column-end: -3;
+}
+
+.navbar-list-item2 {
+	grid-column-end: -2;
+}
+
+.navbar-list-item3 {
+	grid-column-end: -1;
+}
+
+
+.navbar-list:hover,
+.navbar-list:active {
 	color: gold;
 	font-weight: bold;
 	font-size: 16pt;
@@ -70,24 +90,27 @@ header {
 
 .header-box {
 	border-radius: 20px;
-	background-color: white;
-	margin-left: 30vw;
-	margin-right: 30vw;
+	background-color: rgb(233,233,233);
+	/* margin-left: 30vw;
+	margin-right: 30vw; */
+	opacity: .75;
+	
 }
 
 h1, h3 {
 	text-align: center;
-	color: #593cb6;
 }
 
 h1 {
 	margin-top: 30px;
 	margin-bottom: 0;
+	color: #593cb6;
 }
 
 h3 {
 	font-style: italic;
 	margin-top: 0;
+	color:black;
 }
 
 .coin-data {
@@ -98,28 +121,91 @@ h3 {
 
 .currencies {
 	display: grid;
-	grid-template-columns: repeat(4, 25%);
-	grid-template-rows: repeat(4, 25%);
+	grid-gap: 20px;
+	grid-template-columns: repeat(auto-fill, 200px);
+	position: absolute;
+	left: 40%;
+	right: 5%;
+	top: 20vh;
+	opacity: .75;
+	z-index: 1;
+	/* grid-template-rows: repeat(4, 25%); */
+}
+
+a[ id= "scroll" ]:target ~ #main article.panel {
+	-webkit-transform: translateY( 0px);
+	transform: translateY( 0px );
 }
 
 .grid-cell {
-	background-color: white;
+	background-color: rgb(233,233,233);
 	margin: 5px;
 	border-radius: 20px;
 }
 
+.coin-name {
+	/* font-weight: 200; */
+	color: #593cb6;
+}
+
 .grid-cell:hover,
 .grid-cell:active {
+	/* font-size: 16pt; */
+	font-weight: bold;
+	color: rgb(233,233,233);
 	border-style: solid;
 	border-width: 2px;
 	border-color: #14d2d6;
-}
-
-.coin-name {
-	font-weight: bold;
-	color: #593cb6;
+	background-image: url("./images/topography.svg"), 
+	linear-gradient(225deg, rgb(12, 236, 197), rgb(89,60,182));
 }
 
 .coin-symbol {
 	font-weight: bold;
+}
+
+@media screen and (max-width: 330px) {
+	.currencies {
+	top: 50vh;
+	
+	left: 0%;
+	right: 0%;
+	}
+
+
+}
+
+@media screen and (max-width: 380px) {
+	.currencies {
+	top: 50vh;
+	
+	left: 0%;
+	right: 0%;
+
+	}
+}
+
+@media screen and (max-width: 415px) {
+	.currencies {
+	top: 30vh;
+	
+	left: 0%;
+	right: 0%;
+	}
+	.header-box {
+		border-radius: 20px;
+		background-color: rgb(233,233,233);
+		margin-left: 0vw;
+		margin-right: 0vw;
+		opacity: .75;
+		
+	}
+	h1 {
+		font-size: 1.618rem;	
+	}
+	
+	h3 {
+		font-size: 1rem;
+
+	}
 }
