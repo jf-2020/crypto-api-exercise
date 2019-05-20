@@ -40,10 +40,13 @@ ul {
 }
 
 .badge {
+	animation: slide-in-blurred-bottom 2.5s .2s both;
 	flex-basis: 66%;
-	padding-left: 10px;
+	/* padding-left: 10px; */
 	font-weight: bold;
-	position: fixed;
+	text-align: center;
+	grid-template-columns: auto;
+	/* position: fixed; */
 	grid-column-start: 1;
 }
 
@@ -53,14 +56,17 @@ ul {
 }
 
 .navbar-list-item1 {
+	animation: slide-in-blurred-bottom 2.5s .4s both;
 	grid-column-end: -3;
 }
 
 .navbar-list-item2 {
+	animation: slide-in-blurred-bottom 2.5s .6s both;
 	grid-column-end: -2;
 }
 
 .navbar-list-item3 {
+	animation: slide-in-blurred-bottom 2.5s .8s both;
 	grid-column-end: -1;
 }
 
@@ -102,7 +108,7 @@ h1, h3 {
 }
 
 h1 {
-	margin-top: 30px;
+	margin-top: 0px;
 	margin-bottom: 0;
 	color: #593cb6;
 }
@@ -120,9 +126,10 @@ h3 {
 }
 
 .currencies {
+	animation: slide-in-blurred-bottom .5s .5s both;
 	display: grid;
 	grid-gap: 20px;
-	grid-template-columns: repeat(auto-fill, 200px);
+	grid-template-columns: repeat(auto-fill, 230px);
 	position: absolute;
 	left: 40%;
 	right: 5%;
@@ -164,48 +171,92 @@ a[ id= "scroll" ]:target ~ #main article.panel {
 	font-weight: bold;
 }
 
-@media screen and (max-width: 330px) {
+/* iPhone 5 */
+@media screen and (max-width: 321px) {
 	.currencies {
-	top: 50vh;
-	
-	left: 0%;
-	right: 0%;
+	top: 40vh;
+	grid-template-columns: 1fr;
+	left: 5%;
+	right: 5%;
 	}
-
-
-}
-
-@media screen and (max-width: 380px) {
-	.currencies {
-	top: 50vh;
-	
-	left: 0%;
-	right: 0%;
-
+	ul {
+		grid-template-columns: auto;
 	}
 }
 
-@media screen and (max-width: 415px) {
+
+/* iPhone Plus */
+@media screen and (min-width: 322px) {
 	.currencies {
-	top: 30vh;
-	
+	top: 31vh;
+	grid-template-columns: 1fr;
+	left: 5%;
+	right: 5%;
+	}
+}
+
+/* iPad */
+
+@media screen and (min-width: 767px) {
+	.currencies {
+	top: 17vh;
+	grid-template-columns: 1fr 1fr;
 	left: 0%;
 	right: 0%;
 	}
-	.header-box {
-		border-radius: 20px;
-		background-color: rgb(233,233,233);
-		margin-left: 0vw;
-		margin-right: 0vw;
-		opacity: .75;
-		
-	}
-	h1 {
-		font-size: 1.618rem;	
-	}
-	
-	h3 {
-		font-size: 1rem;
+}
 
+@media screen and (min-width: 770px) {
+	.currencies {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(auto-fill, 230px);
+	position: absolute;
+	left: 40%;
+	right: 5%;
+	top: 20vh;
+	opacity: .75;
+	z-index: 1;
+	}
+}
+
+@-webkit-keyframes slide-in-blurred-bottom {
+	0% {
+		-webkit-transform: translateY(1000px) scaleY(2.5) scaleX(0.2);
+				transform: translateY(1000px) scaleY(2.5) scaleX(0.2);
+		-webkit-transform-origin: 50% 0%;
+				transform-origin: 50% 0%;
+		-webkit-filter: blur(40px);
+				filter: blur(40px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateY(0) scaleY(1) scaleX(1);
+				transform: translateY(0) scaleY(1) scaleX(1);
+		-webkit-transform-origin: 50% 50%;
+				transform-origin: 50% 50%;
+		-webkit-filter: blur(0);
+				filter: blur(0);
+		opacity: 1;
+	}
+}
+	@keyframes slide-in-blurred-bottom {
+	0% {
+		-webkit-transform: translateY(1000px) scaleY(2.5) scaleX(0.2);
+				transform: translateY(1000px) scaleY(2.5) scaleX(0.2);
+		-webkit-transform-origin: 50% 0%;
+				transform-origin: 50% 0%;
+		-webkit-filter: blur(40px);
+				filter: blur(40px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateY(0) scaleY(1) scaleX(1);
+				transform: translateY(0) scaleY(1) scaleX(1);
+		-webkit-transform-origin: 50% 50%;
+				transform-origin: 50% 50%;
+		-webkit-filter: blur(0);
+				filter: blur(0);
+		opacity: 1;
 	}
 }

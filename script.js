@@ -4,7 +4,7 @@
 /* API urls */
 /************/
 
-const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=100";
+const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=20";
 const coincap = "https://api.coincap.io/v2/assets/bitcoin-cash-sv/history?interval=m15";
 
 /***********/
@@ -53,8 +53,22 @@ function addCoin(coin) {
 		name = "Ripple";
 	}
 	const symbol = coin.symbol;
-	const currentPrice = "Current Price: $" + coin.price_usd;
-	const marketCap = "Market Cap: $" + coin.market_cap_usd;
+
+	// function to format the price to into currency 
+	const formatterPrice = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+		minimumFractionDigits: 2
+	})
+	const currentPrice = "Current Price: " + formatterPrice.format(coin.price_usd);
+
+	// function to format the market price to not have decimal points
+	const formatterMarketCap = new Intl.NumberFormat('en-US', {
+		style: 'decimal',
+		maximumFractionDigits: 0
+	})
+	const marketCap = "Market Cap: $" + formatterMarketCap.format(coin.market_cap_usd);
+
 	const dataArray = [name, symbol, currentPrice, marketCap];
 	// create a sub list to hold a list of the extracted data
 	const subList = document.createElement("ul");
