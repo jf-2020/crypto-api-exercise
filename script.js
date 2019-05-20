@@ -4,7 +4,7 @@
 /* API urls */
 /************/
 
-const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=20";
+const coinlore = "https://api.coinlore.com/api/tickers/?start=0&limit=100";
 const coincap = "https://api.coincap.io/v2/assets/bitcoin-cash-sv/history?interval=m15";
 
 /***********/
@@ -62,6 +62,13 @@ function addCoin(coin) {
 	})
 	const currentPrice = "Current Price: " + formatterPrice.format(coin.price_usd);
 
+	// function to format the percent to display a percentage
+	const formatterPercentChangeDay = new Intl.NumberFormat('en-US', {
+		style: 'percent',
+		minimumFractionDigits: 2
+	})
+	const percentChangeDay = "24h % Change: " + formatterPercentChangeDay.format((coin.percent_change_24h)/100);
+
 	// function to format the market price to not have decimal points
 	const formatterMarketCap = new Intl.NumberFormat('en-US', {
 		style: 'decimal',
@@ -69,7 +76,7 @@ function addCoin(coin) {
 	})
 	const marketCap = "Market Cap: $" + formatterMarketCap.format(coin.market_cap_usd);
 
-	const dataArray = [name, symbol, currentPrice, marketCap];
+	const dataArray = [name, symbol, currentPrice, percentChangeDay, marketCap];
 	// create a sub list to hold a list of the extracted data
 	const subList = document.createElement("ul");
 	// add in a class name for styling
@@ -87,7 +94,7 @@ function addCoin(coin) {
 		}
 	});
 	// add in the data to the sub list
-	for (let i=0; i<4; i++) {
+	for (let i=0; i<dataArray.length; i++) {
 		// use a list item element to hold the data
 		const subItem = document.createElement("li");
 		// add in the data to the sub list
@@ -150,7 +157,25 @@ function loadCoinPrices(id, name) {
 
 function buildChart(prices, dates, times, name) {
 	/* build out a price chart, where each parameter is an array */
-	
+	const dateAndTimes = []; // declare/init new labels array
+	// loop over the dates array
+	for (let i=0; i<dates.length; i++) {
+		// grab each 6th date
+		if (i%6 == 0) {
+			// append to new labels array
+			dateAndTimes.push(dates[i]);
+		} else {
+			// otherwise, push empty string
+			dateAndTimes.push("");
+		}
+	}
+
+	const prettyPrices = []; // declare/init container for formatted prices
+	for (let i=0; i<prices.length; i++) {
+		// parse string as float, rounding off to hundredths place
+		prettyPrices.push(parseFloat(prices[i]).toFixed(2));
+	}
+
 	// get chart context, which consists of getting the chart canvas
 	// from the page & subsequently accessing its dimensional context
 	const ctx = document.getElementById("myChart").getContext("2d");
@@ -171,11 +196,36 @@ function buildChart(prices, dates, times, name) {
 				
 				// borderColor: "rgb(255, 99, 132)",
 				// add in the data as an array
-				data: prices
+				data: prettyPrices
+				
 			}]
 		},
+		
 		// lastly, configure the options
-		options: {}
+		options: {
+			legend: {
+				labels: {
+					fontColor: "white",
+					fontSize: 18
+				}
+			},
+			scales: {
+				yAxes: [{
+					ticks: {
+						fontColor: "white",
+					}
+				}],
+				xAxes: [{
+					labels: dateAndTimes,
+					ticks: {
+						fontColor: "white",
+					}
+				}]
+			},
+			chartArea: {
+				backgroundColor: "white",
+			}
+		}
 	});
 }
 
