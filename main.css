@@ -21,17 +21,18 @@ ul {
 
 .navbar-list {
     margin: 0;
-    font-size: 1.618rem;
+    font-size: 1.5rem;
 	display: grid;
 	grid-row-gap: 10px;
 	grid-template-columns: repeat(5, 1fr);
 	text-align: right;
+	justify-content: space-between;
 	color: rgb(233,233,233)
 }
 
 .badge {
     animation: slide-in-blurred-bottom 2.5s .2s both;
-    font-size: 1.618rem;
+    
 	font-weight: bold;
 	text-align: center;
 	grid-column: 1;
@@ -45,6 +46,7 @@ ul {
 .navbar-list-item2 {
 	animation: slide-in-blurred-bottom 2.5s .6s both;
 	grid-column-end: -2;
+	
 }
 
 .navbar-list-item3 {
@@ -189,4 +191,16 @@ a[ id= "scroll" ]:target ~ #main article.panel {
 				filter: blur(0);
 		opacity: 1;
 	}
+}
+
+@media screen and (max-width: 321px) {
+
+.navbar-list {
+	font-size: 8pt;
+}
+
+.badge {
+	font-size: 16pt;
+	grid-column: 1 / -1;
+}
 }
